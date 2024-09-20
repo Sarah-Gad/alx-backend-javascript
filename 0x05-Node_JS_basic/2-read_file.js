@@ -1,8 +1,8 @@
 // This module reads from a file
 const { parse } = require('csv-parse');
+const fs = require('fs');
 
 function countStudents(path) {
-  const fs = require('fs');
   fs.readFile(path, 'utf-8', (err, data) => {
     if (err) {
       throw new Error('Cannot load the database');
@@ -11,24 +11,24 @@ function countStudents(path) {
       if (err) {
         throw new Error('Error parsing CSV data');
       }
-      total_st = records.length;
-      console.log(`Number of students: ${total_st}`);
-      let stu_cs = 0;
-      let stu_swe = 0;
-      const cs_ar = [];
-      const swe_ar = [];
-      for (let i = 0; i < total_st; i++) {
-        if (records[i].field == 'CS') {
-          stu_cs++;
-          cs_ar.push(records[i].firstname);
+      const totalSt = records.length;
+      console.log(`Number of students: ${totalSt}`);
+      let stuCs = 0;
+      let stuSwe = 0;
+      const csAr = [];
+      const sweAr = [];
+      for (let i = 0; i < totalSt; i += 1) {
+        if (records[i].field === 'CS') {
+          stuCs += 1;
+          csAr.push(records[i].firstname);
         }
-        if (records[i].field == 'SWE') {
-          stu_swe++;
-          swe_ar.push(records[i].firstname);
+        if (records[i].field === 'SWE') {
+          stuSwe += 1;
+          sweAr.push(records[i].firstname);
         }
       }
-      console.log(`Number of students in CS: ${stu_cs}. List: ${cs_ar.join(', ')}`);
-      console.log(`Number of students in SWE: ${stu_swe}. List: ${swe_ar.join(', ')}`);
+      console.log(`Number of students in CS: ${stuCs}. List: ${csAr.join(', ')}`);
+      console.log(`Number of students in SWE: ${stuSwe}. List: ${sweAr.join(', ')}`);
     });
   });
 }
