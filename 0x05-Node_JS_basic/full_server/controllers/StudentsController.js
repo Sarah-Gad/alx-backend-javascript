@@ -1,5 +1,6 @@
 // This module defines the student controller
-import readDatabase from "../utils"
+import readDatabase from '../utils';
+
 const VALID_MAJORS = ['CS', 'SWE'];
 class StudentsController {
   static getAllStudents(request, response) {
@@ -59,4 +60,4 @@ class StudentsController {
       });
   }
 }
-export default StudentsController
+export default StudentsController;
