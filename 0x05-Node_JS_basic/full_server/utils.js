@@ -3,11 +3,11 @@ import fs from 'fs';
 
 const readDatabase = (path) => new Promise((res, rej) => {
   if (!path) {
-    rej(new Error('Can not read database'));
+    rej(new Error('Cannot load the database'));
   }
   fs.readFile(path, 'utf-8', (err, data) => {
     if (err) {
-      rej(new Error('Can not read database'));
+      rej(new Error('Cannot load the database'));
     }
     if (data) {
       const fileLines = data
